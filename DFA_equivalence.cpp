@@ -22,13 +22,16 @@ public:
 
     void readData(char fileName[]) {
         int state,state1,state2;
+        map<int, int> ordStates;
+        int countStates = 1;
         char letter;
         ifstream f(fileName);
 
         f>>nrStates;
         for(int i=0; i<nrStates; ++i) {
             f>>state;
-            states.push_back(state % maxStates);
+            ordStates[state] = countStates;
+            states.push_back(countStates++);
         }
 
         f>>nrLetters;
@@ -38,17 +41,20 @@ public:
         }
 
         f>>initialState;
-        initialState = initialState % maxStates;
+        initialState = ordStates[initialState];
         f>>nrFinalStates;
         for(int i=0; i<nrFinalStates; ++i) {
             f>>state;
-            finalStates[state % maxStates] = true;
+            state = ordStates[state];
+            finalStates[state] = true;
         }
 
         f>>nrTransitions;
         for(int i=0; i<nrTransitions; ++i) {
             f>>state1>>letter>>state2;
-            transitions[state1 % maxStates][letter - 'a'] = state2 % maxStates;
+            state1 = ordStates[state1];
+            state2 = ordStates[state2];
+            transitions[state1][letter - 'a'] = state2;
         }
     }
 };
