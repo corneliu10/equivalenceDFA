@@ -2,6 +2,7 @@
 This program determines whether two finite automata A and B recognize the same language.
 
 # Input for a DFA:
+```
 Number of States<br />
 States<br />
 Nr letters <br />
@@ -24,4 +25,4 @@ a b <br />
 1 a 2 <br />
 2 b 2 <br />
 2 a 3 <br />
- 
+``` 
